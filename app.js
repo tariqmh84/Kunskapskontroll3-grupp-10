@@ -32,14 +32,15 @@ function getCards(event) {
 
             // Detta kanske är bra att ha med? 
             //  let serverId = data.photos.photo[0].server;
-
             // let secret = data.photos.photo[0].secret; 
+
 
             // Skapar en for-loop
             for (let i = 0; i < data.photos.photo.length; i++) {
                 let imageSrc = `http://live.staticflickr.com/${data.photos.photo[i].server}/${data.photos.photo[i].id}_${data.photos.photo[i].secret}_q.jpg`;
+                let id = data.photos.photo[i].id;
 
-                let id = data.photos.photo[0].id;
+                // Skapa Card object
                 let card = new Card(imageSrc, id);
 
                 // Pushar in bilderna i arrayn
