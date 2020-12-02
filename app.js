@@ -28,6 +28,11 @@ function getCards(event) {
         .then(response => response.json())
         .then(data => {
 
+            // Detta kanske är bra att ha med? 
+           /*  let serverId = data.photos.photo[0].server;
+            let id = data.photos.photo[0].id;
+            let secret = data.photos.photo[0].secret; */
+
             // Skapar en for-loop
             for (let i = 0; i < data.photos.photo.length; i++) {
                 let image = `http://live.staticflickr.com/${data.photos.photo[i].server}/${data.photos.photo[i].id}_${data.photos.photo[i].secret}_q.jpg`;
@@ -59,12 +64,38 @@ function getCards(event) {
         .catch((err) => console.log(err));
 }
 
-// När användaren klickar på sitt första valda kort, börjar tiden att ticka neråt.
-let time = document.querySelector('#time');
+// Selectar button-elementet (start)
+let startButton = document.querySelector('button');
+
+// Tiden räknar ner från 60 sekunder när användaren klickar på start-knappen.
+startButton.addEventListener('click',
+    function(){
+        let startMinute = 1;
+        let time = startMinute * 60;
+
+        let countDown = document.getElementById('time');
+        setInterval(updateCountDown, 1000);
+
+        function updateCountDown(){
+        let minutes = Math.floor(time / 60);
+        let seconds = time % 60;
+
+        countDown.innerHTML = `${minutes}: ${seconds}`;
+        time--;
+
+        if(time === -2){
+            alert('Game over!');
+        }
+
+        }
+        
+ 
+    }
+)
+
 
 // För varje 'miss' läggs det till ett under Attempts.
 let attempts = document.querySelector('#attempts');
-
 
 // När användaren hittar ett par för hon 1 poäng.
 
