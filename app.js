@@ -38,15 +38,21 @@ function getCards(event) {
             }
             // Välja 12 sticker av fotona och dubblar dem och ligga dem i DOM
             let pickedImages = imageArray.splice(0, 12);
+            // Duplicate Fotona
+            let dupelicateElementArr = pickedImages.reduce(function(res, current) {
+                return res.concat([current, current]);
+            }, []);
+
+            //Randomiz arrayen
+            let randomizedArr = dupelicateElementArr.sort(() => Math.random() - 0.5);
             for (let item of pickedImages) {
-                for (let j = 0; j < 2; j++) {
                     let cardDiv = document.createElement('div');
                     cardDiv.classList = 'card';
                     let img = document.createElement('img');
                     img.src = item;
                     imgWrappers.appendChild(cardDiv);
                     cardDiv.appendChild(img);
-                }
+                
             }
             console.log(imageArray)
         })
