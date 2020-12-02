@@ -21,7 +21,7 @@ function getCards(event) {
     fetchedURL += "&nojsoncallback=1";
 
     // Skapa en Array som ska vi pusha alla fotorna i
-    let imageArray = []
+    let imageArray = [];
 
     // Skapar en fetch
     fetch(fetchedURL)
@@ -48,6 +48,17 @@ function getCards(event) {
                     cardDiv.appendChild(img);
                 }
             }
+            console.log(imageArray)
         })
         .catch((err) => console.log(err));
 }
+
+// När användaren klickar på sitt första valda kort, börjar tiden att ticka neråt.
+
+// För varje 'miss' läggs det till ett under Attempts.
+
+// När användaren hittar ett par för hon 1 poäng.
+
+let score = document.querySelector('#score');
+
+
