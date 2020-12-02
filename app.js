@@ -45,14 +45,14 @@ function getCards(event) {
 
             //Randomiz arrayen
             let randomizedArr = dupelicateElementArr.sort(() => Math.random() - 0.5);
-            for (let item of pickedImages) {
-                    let cardDiv = document.createElement('div');
-                    cardDiv.classList = 'card';
-                    let img = document.createElement('img');
-                    img.src = item;
-                    imgWrappers.appendChild(cardDiv);
-                    cardDiv.appendChild(img);
-                
+            for (let item of randomizedArr) {
+                let cardDiv = document.createElement('div');
+                cardDiv.classList = 'card';
+                let img = document.createElement('img');
+                img.src = item;
+                imgWrappers.appendChild(cardDiv);
+                cardDiv.appendChild(img);
+
             }
             console.log(imageArray)
         })
@@ -64,9 +64,8 @@ let time = document.querySelector('#time');
 
 // För varje 'miss' läggs det till ett under Attempts.
 let attempts = document.querySelector('#attempts');
-if()
+
 
 // När användaren hittar ett par för hon 1 poäng.
 
 let score = document.querySelector('#score');
-if()
