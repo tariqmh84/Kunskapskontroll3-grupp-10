@@ -33,21 +33,33 @@ function getCards(event) {
                 imageArray.push(image);
 
             }
+
             // Välja 12 sticker av fotona och dubblar dem och ligga dem i DOM
             let pickedImages = imageArray.splice(0, 12);
-            for (let item of pickedImages) {
-                for (let j = 0; j < 2; j++) {
-                    let cardDiv = document.createElement('div');
-                    cardDiv.classList = 'card';
-                    let img = document.createElement('img');
-                    img.src = item;
-                    imgWrappers.appendChild(cardDiv);
-                    cardDiv.appendChild(img);
-                }
 
+
+            let dupelicateElementArr = pickedImages.reduce(function(res, current, index, array) {
+                return res.concat([current, current]);
+            }, []);
+
+
+
+            //Randomiz arrayen
+            let randomizedArr = dupelicateElementArr.sort(() => Math.random() - 0.5)
+
+
+            for (let item of randomizedArr) {
+                let cardDiv = document.createElement('div');
+                cardDiv.classList = 'card';
+                let img = document.createElement('img');
+                img.src = item;
+                imgWrappers.appendChild(cardDiv);
+                cardDiv.appendChild(img);
 
 
             }
+
+
 
 
 
