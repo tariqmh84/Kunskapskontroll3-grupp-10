@@ -54,11 +54,13 @@ function getCards(event) {
 }
 
 // När användaren klickar på sitt första valda kort, börjar tiden att ticka neråt.
+let time = document.querySelector('#time');
 
 // För varje 'miss' läggs det till ett under Attempts.
 let attempts = document.querySelector('#attempts');
 if()
 
 // När användaren hittar ett par för hon 1 poäng.
+
 let score = document.querySelector('#score');
 if()
