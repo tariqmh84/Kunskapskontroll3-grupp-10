@@ -51,3 +51,7 @@ body {
     margin-left: 5px;
     width: 60px;
 }
+
+.bg {
+    background: url('img/cardback.png') no-repeat center center;
+}
