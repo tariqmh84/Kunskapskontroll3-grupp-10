@@ -5,7 +5,7 @@
 }
 
 body {
-    background-image: url('/christmas2.png');
+    background-image: url('/img/bakgrund.png');
     /* background: radial-gradient(rgba(111, 194, 219, 0.603), rgba(236, 217, 104, 0.699)); */
 }
 
@@ -38,7 +38,9 @@ body {
 
 .card {
     background: black;
-    height: 130px;
+    height: 170px;
     width: 150px;
     cursor: pointer;
+    background-image: url('/img/cardback.png');
+    border-radius: 10px;
 }
