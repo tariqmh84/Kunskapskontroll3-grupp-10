@@ -5,8 +5,12 @@
 }
 
 body {
+<<<<<<< Updated upstream
     background-image: url('/img/bakgrund.png');
     /* background: radial-gradient(rgba(111, 194, 219, 0.603), rgba(236, 217, 104, 0.699)); */
+=======
+    background-image: url('/christmas2.png');
+>>>>>>> Stashed changes
 }
 
 .container {
