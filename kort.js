@@ -10,7 +10,3 @@ function Card(n, ) {
 Array.prototype.arrLength = function() {
     let card = new Card();
 }
-
-
->>>
->>> > main
