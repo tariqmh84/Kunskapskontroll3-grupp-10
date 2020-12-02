@@ -6,7 +6,6 @@
 
 body {
     background-image: url('/img/bakgrund.png');
-    /* background: radial-gradient(rgba(111, 194, 219, 0.603), rgba(236, 217, 104, 0.699)); */
 }
 
 .container {
@@ -23,7 +22,7 @@ body {
 }
 
 .game-info {
-    font-size: 2.5rem;
+    font-size: 2rem;
     display: flex;
     justify-content: space-between;
     padding: 0 120px;
@@ -36,11 +35,19 @@ body {
     grid-gap: 10px;
 }
 
-.card {
-    background: black;
-    height: 170px;
+#searchdiv {
+    display: flex;
+    justify-content: center;
+    font-size: 1.7rem;
+    margin-top: 20px;
+}
+
+#searchterm {
+    margin-left: 10px;
     width: 150px;
-    cursor: pointer;
-    background-image: url('/img/cardback.png');
-    border-radius: 10px;
+}
+
+#submit {
+    margin-left: 5px;
+    width: 60px;
 }
