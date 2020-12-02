@@ -23,13 +23,16 @@ function getCards(event) {
     // Skapa en Array som ska vi pusha alla fotorna i
     let imageArray = []
 
+    // Skapar en fetch
     fetch(fetchedURL)
         .then(response => response.json())
         .then(data => {
 
+            // Skapar en for-loop
             for (let i = 0; i < data.photos.photo.length; i++) {
                 let image = `http://live.staticflickr.com/${data.photos.photo[i].server}/${data.photos.photo[i].id}_${data.photos.photo[i].secret}_q.jpg`;
 
+                // Pushar in bilderna i arrayn
                 imageArray.push(image);
 
             }
@@ -44,14 +47,7 @@ function getCards(event) {
                     imgWrappers.appendChild(cardDiv);
                     cardDiv.appendChild(img);
                 }
-
-
-
             }
-
-
-
         })
         .catch((err) => console.log(err));
-
 }
