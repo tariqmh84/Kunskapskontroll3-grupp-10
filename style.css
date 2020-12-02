@@ -10,8 +10,10 @@ body {
 
 .container {
     height: 100vh;
-    width: 70rem;
-    margin-left: 14rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .title {
