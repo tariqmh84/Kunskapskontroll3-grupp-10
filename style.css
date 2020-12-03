@@ -57,3 +57,7 @@ body {
 .back {
     background: url('img/cardback.png') no-repeat center center;
 }
+
+#score {
+    margin-right: 50px;
+}

@@ -64,10 +64,20 @@ function getCards(event) {
                 cardDiv.appendChild(img);
 
             }
+            // Skapar en click functionen på alla korten
+            card.addEventListener('click', flipCard);
+
+            // Skapar en funktion för flipcard
+            function flipCard(){
+                
+            }
+
 
         })
         .catch((err) => console.log(err));
 }
+
+
 
 // Selectar button-elementet (start)
 let startButton = document.querySelector('button');
@@ -100,10 +110,21 @@ startButton.addEventListener('click',
     }
 )
 
+// När användaren hittar ett par för h*n 1 poäng.
+let scoreElement = document.querySelector('#score');
 
-// För varje 'miss' läggs det till ett under Attempts.
-let attempts = document.querySelector('#attempts');
+let score = 0;
+scoreElement.innerText = `Score: ${score}`;
 
-// När användaren hittar ett par för hon 1 poäng.
+let cardsId = [];
+let cardSelected = [];
 
-let score = document.querySelector('#score');
+function checkForMatch(){
+    let cards = document.querySelector('.game-container');
+    let firstCard = cardsId[0];
+    let secondCard = cardsId[1];
+
+    if(cardSelected[0] === cardSelected[1] && firstCard !== secondCard){
+        alert('You have found a match');
+    }
+}
