@@ -31,9 +31,8 @@ function getCards(event) {
         .then(data => {
 
             // Detta kanske är bra att ha med? 
-            //  let serverId = data.photos.photo[0].server;
-            // let secret = data.photos.photo[0].secret; 
-
+            let serverId = data.photos.photo[0].server;
+            let secret = data.photos.photo[0].secret; 
 
             // Skapar en for-loop
             for (let i = 0; i < data.photos.photo.length; i++) {
@@ -89,6 +88,7 @@ startButton.addEventListener('click',
             countDown.innerHTML = `${minutes}: ${seconds}`;
             time--;
 
+            // När tiden slår 00.00 kommer det upp en alert 'Game over'
             if (time === -2) {
                 alert('Game over!');
                 imgWrappers.innerHTML = '';
