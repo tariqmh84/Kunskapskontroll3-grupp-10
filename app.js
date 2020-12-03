@@ -4,7 +4,12 @@ let apiKey = '0133bc1fb6266761784237b4007a7c13';
 let getDataBtn = document.querySelector('#searchdiv');
 let inputVal = document.querySelector('#searchterm');
 let imgWrappers = document.querySelector('.game-container');
-//let cardElem = document.querySelector('.card');
+
+let imgs = document.querySelectorAll('img');
+let card = {};
+let chosenCards = []
+
+
 
 // Event EventListener så användaren kan hämta olika typer av images korter
 getDataBtn.addEventListener('submit', getCards);
@@ -41,7 +46,7 @@ function getCards(event) {
                 let id = data.photos.photo[i].id;
 
                 // Skapa Card object
-                let card = new Card(imageSrc, id);
+                card = new Card(imageSrc, id);
 
                 // Pushar in bilderna i arrayn
                 imageArray.push(card.urlSource);
@@ -56,49 +61,70 @@ function getCards(event) {
 
             //Randomiz arrayen
             let randomizedArr = dupelicateElementArr.sort(() => Math.random() - 0.5);
-            for (let item of randomizedArr) {
-                let cardDiv = document.createElement('div');
-                cardDiv.classList = 'card back';
-                let img = document.createElement('img');
-                img.src = item;
-                imgWrappers.appendChild(cardDiv);
-                cardDiv.appendChild(img);
-
-            }
-
+            // generate korter från arrayen
+            generateCards(randomizedArr);
+            let cards = document.querySelectorAll('.card');
+            cards.forEach(elm => elm.addEventListener('click', doFlip));
+            startTimer();
         })
         .catch((err) => console.log(err));
 }
 
-// Selectar button-elementet (start)
-let startButton = document.querySelector('button');
+function doFlip() {
+    if (this.classList.contains('active')) {
+        this.classList.remove('active')
+    } else {
+        this.classList.add('active');
+    }
+}
+
 
 // Tiden räknar ner från 60 sekunder när användaren klickar på start-knappen.
-startButton.addEventListener('click',
-    function() {
-        let startMinute = 1;
-        let time = startMinute * 60;
+function startTimer() {
+    document.querySelector('#submit').disabled = true;
+    let startMinute = 1;
+    let time = startMinute * 60;
 
-        let countDown = document.getElementById('time');
-        setInterval(updateCountDown, 1000);
+    let countDown = document.getElementById('time');
+    setInterval(updateCountDown, 1000);
 
-        function updateCountDown() {
-            let minutes = Math.floor(time / 60);
-            let seconds = time % 60;
+    function updateCountDown() {
 
-            countDown.innerHTML = `${minutes}: ${seconds}`;
-            time--;
+        let minutes = Math.floor(time / 60);
+        let seconds = time % 60;
+        countDown.innerHTML = `${minutes}: ${seconds}`;
+        time--;
 
-            if (time === -2) {
-                alert('Game over!');
-                imgWrappers.innerHTML = '';
-            }
-
+        if (time === -2) {
+            alert('Game over!');
+            imgWrappers.innerHTML = '';
+            document.querySelector('#submit').disabled = false;
         }
+    }
+}
 
+
+
+
+function generateCards(arr) {
+    for (let item of arr) {
+        let cardDiv = document.createElement('div');
+        cardDiv.classList = 'card';
+        let cardDivfront = document.createElement('div');
+        cardDivfront.classList = 'card-face front';
+        let cardDivBack = document.createElement('div');
+        cardDivBack.classList = 'card-face back';
+        let img = document.createElement('img');
+        img.src = item;
+        img.classList = 'back';
+        imgWrappers.appendChild(cardDiv);
+        cardDiv.appendChild(cardDivfront);
+        cardDiv.appendChild(cardDivBack);
+        cardDivBack.appendChild(img);
 
     }
-)
+
+}
 
 
 // För varje 'miss' läggs det till ett under Attempts.
