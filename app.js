@@ -31,9 +31,30 @@ function getCards(event) {
     let imageArray = [];
 
     // Skapar en fetch
-    fetch(fetchedURL)
-        .then(response => response.json())
-        .then(data => {
+    fetch(fetchedURL).then(
+        function(response){
+
+            if(response.status === 100){
+                throw 'The API key passed was not valid or has expired';
+            }else if(response.status === 105){
+                throw 'The requested service is temporarily unavailable'
+            }else if(response.status === 106){
+                throw 'The requested operation failed due to a temporary issue.'
+            }else if(response.status === 111){
+                throw 'The requested response format was not found'
+            }else if(response.status === 112){
+                throw 'The requested method was not found'
+            }else if(response.status === 114){
+                throw 'The SOAP envelope send in the request could not be parsed.'
+            }else if(response.status === 115){
+                throw 'The XML-RPC request document could not be parsed.'
+            }else if(response.status === 116){
+                throw 'One or more arguments contained a URL that has been used for absure on Flickr.'
+            }else {
+                return response.json();
+            }
+        }
+    ).then(data => {
 
             // Detta kanske är bra att ha med? 
             let serverId = data.photos.photo[0].server;
