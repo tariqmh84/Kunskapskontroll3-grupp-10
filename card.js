@@ -1,18 +1,14 @@
 // Skapar kort-objekt
 // Construtor
-function Card(urlSource, id) {
-    this.urlSource = urlSource;
+function Card(id, urlSource) {
     this.id = id;
+    this.urlSource = urlSource;
     this.isFlippedCard = false;
 }
 
 // Instans-metod
 Card.prototype.flippedCard = function() {
-    if (!isFlippedCard) {
-        isFlippedCard = true;
-        return;
-    }
-
+    return this.id;
 }
 
 export { Card }
