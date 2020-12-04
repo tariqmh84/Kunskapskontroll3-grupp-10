@@ -36,8 +36,8 @@ function getCards(event) {
         .then(data => {
 
             // Detta kanske är bra att ha med? 
-            //  let serverId = data.photos.photo[0].server;
-            // let secret = data.photos.photo[0].secret; 
+            let serverId = data.photos.photo[0].server;
+            let secret = data.photos.photo[0].secret; 
 
 
             // Skapar en for-loop
@@ -78,8 +78,6 @@ function doFlip() {
     } else {
         this.classList.add('active');
     }
-    
-    
 }
 
 
@@ -107,7 +105,7 @@ function startTimer() {
     }
 }
 
-
+// Skapar en loop som skapar frontSide och Backside av korten.
 function generateCards(arr) {
     for (let item of arr) {
         let cardDiv = document.createElement('div');
@@ -128,5 +126,6 @@ function generateCards(arr) {
 
 }
 
-// När användaren hittar ett par för hon 1 poäng.
+// När användaren hittar ett par för h*n 1 poäng.
 let score = document.querySelector('#score');
+
