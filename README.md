@@ -1,5 +1,14 @@
 # Kunskapskontroll3-grupp-10
 
+Gruppmedlemmmar: 
+Julia Bengtsson, Tariq Mahrous och Samir Aboutaka.
+
+Ansvarsområde:
+Julia: Design och grunden i HTML/CSS, timern på spelet, ReadMe-filen och poängen.
+Tariq: API, korten (fetch) och moduler.
+Samir: Inte delaktig!
+Kommentar: Vi har inte varit så duktiga på att dela upp ansvarsområden mellan oss, utan vi har hjälpts åt och diskuterat digitalt. 
+
 Vi har skapat ett Memory Spel med API. 
 Det finns 12 par bland alla korten.
 
