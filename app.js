@@ -9,8 +9,6 @@ let imgs = document.querySelectorAll('img');
 let card = {};
 let chosenCards = []
 
-
-
 // Event EventListener så användaren kan hämta olika typer av images korter
 getDataBtn.addEventListener('submit', getCards);
 
@@ -34,6 +32,7 @@ function getCards(event) {
     fetch(fetchedURL).then(
         function(response){
 
+            // Errorhantering3
             if(response.status === 100){
                 throw 'The API key passed was not valid or has expired';
             }else if(response.status === 105){

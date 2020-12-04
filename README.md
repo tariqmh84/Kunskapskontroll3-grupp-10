@@ -4,7 +4,7 @@ Gruppmedlemmmar:
 Julia Bengtsson, Tariq Mahrous och Samir Aboutaka.
 
 Ansvarsområde:
-Julia: Design och grunden i HTML/CSS, timern på spelet, ReadMe-filen och poängen.
+Julia: Design och grunden i HTML/CSS, timern på spelet, ReadMe-filen och poängen. Errorhantering!
 Tariq: API, korten (fetch) och moduler.
 Samir: Inte delaktig!
 Kommentar: Vi har inte varit så duktiga på att dela upp ansvarsområden mellan oss, utan vi har hjälpts åt och diskuterat digitalt. 
