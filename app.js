@@ -70,12 +70,16 @@ function getCards(event) {
         .catch((err) => console.log(err));
 }
 
+// Skapar en function för att korten inte ska synas direkt när man klickar på start.
+// När användaren klickar på ett kort vänder den sida och en bild syns.
 function doFlip() {
     if (this.classList.contains('active')) {
         this.classList.remove('active')
     } else {
         this.classList.add('active');
     }
+    
+    
 }
 
 
@@ -104,8 +108,6 @@ function startTimer() {
 }
 
 
-
-
 function generateCards(arr) {
     for (let item of arr) {
         let cardDiv = document.createElement('div');
@@ -126,10 +128,5 @@ function generateCards(arr) {
 
 }
 
-
-// För varje 'miss' läggs det till ett under Attempts.
-let attempts = document.querySelector('#attempts');
-
 // När användaren hittar ett par för hon 1 poäng.
-
 let score = document.querySelector('#score');
