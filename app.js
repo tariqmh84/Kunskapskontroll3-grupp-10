@@ -8,8 +8,6 @@ let card = {};
 let cards = [];
 let chosenCards = [];
 
-
-
 // Event EventListener så användaren kan hämta olika typer av images korter
 getDataBtn.addEventListener('submit', getCards);
 
@@ -27,9 +25,31 @@ function getCards(event) {
     // Skapa en Array som ska vi pusha alla fotorna i
     let imageArray = [];
     // Skapar en fetch
-    fetch(fetchedURL)
-        .then(response => response.json())
-        .then(data => {
+    fetch(fetchedURL).then(
+        function(response){
+
+            // Errorhantering3
+            if(response.status === 100){
+                throw 'The API key passed was not valid or has expired';
+            }else if(response.status === 105){
+                throw 'The requested service is temporarily unavailable'
+            }else if(response.status === 106){
+                throw 'The requested operation failed due to a temporary issue.'
+            }else if(response.status === 111){
+                throw 'The requested response format was not found'
+            }else if(response.status === 112){
+                throw 'The requested method was not found'
+            }else if(response.status === 114){
+                throw 'The SOAP envelope send in the request could not be parsed.'
+            }else if(response.status === 115){
+                throw 'The XML-RPC request document could not be parsed.'
+            }else if(response.status === 116){
+                throw 'One or more arguments contained a URL that has been used for absure on Flickr.'
+            }else {
+                return response.json();
+            }
+        }
+    ).then(data => {
             // Skapar en for-loop
             for (let i = 0; i < data.photos.photo.length; i++) {
                 let id = data.photos.photo[i].id;
@@ -61,6 +81,8 @@ function getCards(event) {
         .catch((err) => console.log(err));
 }
 
+// Skapar en function för att korten inte ska synas direkt när man klickar på start.
+// När användaren klickar på ett kort vänder den sida och en bild syns.
 function doFlip() {
     if (this.classList.contains('active')) {
         this.classList.remove('active')
@@ -133,6 +155,7 @@ function startTimer() {
     }
 }
 
+// Skapar en loop som skapar frontSide och Backside av korten.
 function generateCardsImg(arr) {
     for (let item of arr) {
         let cardDiv = document.createElement('div');
@@ -152,9 +175,7 @@ function generateCardsImg(arr) {
     }
 }
 
-// För varje 'miss' läggs det till ett under Attempts.
-let attempts = document.querySelector('#attempts');
 
-// När användaren hittar ett par för hon 1 poäng.
-
+// När användaren hittar ett par för h*n 1 poäng.
 let score = document.querySelector('#score');
+
