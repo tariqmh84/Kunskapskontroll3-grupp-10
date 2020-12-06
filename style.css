@@ -5,7 +5,8 @@
 }
 
 body {
-    background-image: url('/img/bakgrund.png');
+    background: url('/img/bakgrund.png') repeat center center;
+    overflow-x: hidden;
 }
 
 .container {
@@ -23,11 +24,18 @@ body {
 }
 
 .game-info {
+    border: 2px solid #193e1e;
     font-size: 2rem;
     display: flex;
-    justify-content: space-between;
-    padding: 0 120px;
-    margin-top: 50px;
+    justify-content: center;
+    margin: 20px 0;
+    width: 100%;
+    background-color: #006221;
+    color: #fff;
+}
+
+.game-info span {
+    padding: 0 2rem;
 }
 
 .game-container {
@@ -46,12 +54,24 @@ body {
 
 #searchterm {
     margin-left: 10px;
-    width: 150px;
+    border: 1px solid #bebebe;
+    padding: 7px;
+    outline: 0;
+    width: 200px;
 }
 
 #submit {
-    margin-left: 5px;
-    width: 60px;
+    background: #23382a;
+    padding: 8px 15px 8px 15px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    outline-style: none;
+    transition: all 0.2s ease-out;
+}
+
+#submit:hover {
+    background: #358a51;
 }
 
 
@@ -72,6 +92,11 @@ body {
     transform-style: preserve-3d;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     position: relative;
+    animation: fadeIn ease 1s;
+    -webkit-animation: fadeIn ease 1s;
+    -moz-animation: fadeIn ease 1s;
+    -o-animation: fadeIn ease 1s;
+    -ms-animation: fadeIn ease 1s;
 }
 
 .card::after {
@@ -94,10 +119,6 @@ body {
     box-shadow: 0px 3px 18px 3px rgba(0, 0, 0, 0.2);
 }
 
-.disable-card-click {
-    pointer-events: none;
-}
-
 .front {
     background: url('img/cardback.png') no-repeat center center;
     background-size: cover;
@@ -107,4 +128,108 @@ body {
 .back {
     transform: rotateY(180deg);
     border-radius: 16px;
+}
+
+.spinner {
+    background: url('img/spinner.png') no-repeat center center;
+    width: 179px;
+    height: 168px;
+    /* border: 4px solid #f3f3f3;
+    border-top: 3px solid #14dd40;
+    border-radius: 100%; */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    /* animation: spin 1s infinite linear; */
+    -webkit-animation: blink-1 0.6s ease-in-out infinite both;
+    animation: blink-1 0.6s ease-in-out infinite both;
+}
+
+
+/* @keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+} */
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+/**
+ * ----------------------------------------
+ * animation pulsate-bck
+ * ----------------------------------------
+ */
+
+@-webkit-keyframes blink-1 {
+    0%,
+    50%,
+    100% {
+        opacity: 1;
+    }
+    25%,
+    75% {
+        opacity: 0;
+    }
+}
+
+@keyframes blink-1 {
+    0%,
+    50%,
+    100% {
+        opacity: 1;
+    }
+    25%,
+    75% {
+        opacity: 0;
+    }
 }

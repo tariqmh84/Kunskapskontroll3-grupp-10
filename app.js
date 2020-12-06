@@ -2,11 +2,20 @@ import { Card } from './card.js';
 // Declare variables som ska använda
 let apiKey = '0133bc1fb6266761784237b4007a7c13';
 let getDataBtn = document.querySelector('#searchdiv');
-let inputVal = document.querySelector('#searchterm');
+let input = document.querySelector('#searchterm');
 let imgWrappers = document.querySelector('.game-container');
+let spinner = document.querySelector(".spinner");
+let countDown = document.getElementById('time');
+spinner.style.display = 'none';
 let card = {};
 let cards = [];
 let chosenCards = [];
+let numberOfSuccess = 0;
+let time;
+let counter;
+
+// När användaren hittar ett par för h*n 1 poäng.
+let score = document.querySelector('#score');
 
 // Event EventListener så användaren kan hämta olika typer av images korter
 getDataBtn.addEventListener('submit', getCards);
@@ -14,10 +23,12 @@ getDataBtn.addEventListener('submit', getCards);
 // Listener som tar hand om data fetching och sortering
 function getCards(event) {
     event.preventDefault();
+    let inputVal = input.value;
+    spinner.style.display = 'block';
     // URL variables för flexibilitet
     let fetchedURL = "https://www.flickr.com/services/rest/?method=flickr.photos.search";
     fetchedURL += "&api_key=" + apiKey;
-    fetchedURL += "&tags=" + inputVal.value;
+    fetchedURL += "&tags=" + inputVal;
     fetchedURL += "&per_page=12"
     fetchedURL += "&format=json";
     fetchedURL += "&nojsoncallback=1";
@@ -26,30 +37,35 @@ function getCards(event) {
     let imageArray = [];
     // Skapar en fetch
     fetch(fetchedURL).then(
-        function(response){
+            function(response) {
 
-            // Errorhantering3
-            if(response.status === 100){
-                throw 'The API key passed was not valid or has expired';
-            }else if(response.status === 105){
-                throw 'The requested service is temporarily unavailable'
-            }else if(response.status === 106){
-                throw 'The requested operation failed due to a temporary issue.'
-            }else if(response.status === 111){
-                throw 'The requested response format was not found'
-            }else if(response.status === 112){
-                throw 'The requested method was not found'
-            }else if(response.status === 114){
-                throw 'The SOAP envelope send in the request could not be parsed.'
-            }else if(response.status === 115){
-                throw 'The XML-RPC request document could not be parsed.'
-            }else if(response.status === 116){
-                throw 'One or more arguments contained a URL that has been used for absure on Flickr.'
-            }else {
-                return response.json();
+                // Errorhantering3
+                if (inputVal == '') {
+                    throw 'The input can not be empty';
+                } else {
+                    if (response.status === 100) {
+                        throw 'The API key passed was not valid or has expired';
+                    } else if (response.status === 105) {
+                        throw 'The requested service is temporarily unavailable'
+                    } else if (response.status === 106) {
+                        throw 'The requested operation failed due to a temporary issue.'
+                    } else if (response.status === 111) {
+                        throw 'The requested response format was not found'
+                    } else if (response.status === 112) {
+                        throw 'The requested method was not found'
+                    } else if (response.status === 114) {
+                        throw 'The SOAP envelope send in the request could not be parsed.'
+                    } else if (response.status === 115) {
+                        throw 'The XML-RPC request document could not be parsed.'
+                    } else if (response.status === 116) {
+                        throw 'One or more arguments contained a URL that has been used for absure on Flickr.'
+                    } else if (response.status >= 200 && response.status <= 299) {
+                        return response.json();
+                    }
+                };
+
             }
-        }
-    ).then(data => {
+        ).then(data => {
             // Skapar en for-loop
             for (let i = 0; i < data.photos.photo.length; i++) {
                 let id = data.photos.photo[i].id;
@@ -73,12 +89,14 @@ function getCards(event) {
             let randomizedArr = dupelicateElementArr.sort(() => Math.random() - 0.5);
 
             // generate korter från arrayen
+
+            spinner.style.display = 'none';
             generateCardsImg(randomizedArr);
             cards = document.querySelectorAll('.card');
             addEventListenerAll();
             startTimer();
         })
-        .catch((err) => console.log(err));
+        .catch((err) => alert(err));
 }
 
 // Skapar en function för att korten inte ska synas direkt när man klickar på start.
@@ -91,7 +109,6 @@ function doFlip() {
     }
     if (chosenCards.indexOf(this) == -1) {
         chosenCards.push(this);
-        console.log(chosenCards)
         removeListeners(this);
     }
     if (chosenCards.length == 2) {
@@ -115,6 +132,8 @@ function removeListeners(item) {
 function checkIfCardsMAtch() {
     if (chosenCards[0].children[1].children[0].currentSrc == chosenCards[1].children[1].children[0].currentSrc) {
         setTimeout(hideCards, 500);
+        numberOfSuccess++;
+        score.innerHTML = `Score: ${numberOfSuccess}`;
     } else {
         setTimeout(resetCards, 500);
     }
@@ -138,22 +157,43 @@ function resetCards() {
 function startTimer() {
     document.querySelector('#submit').disabled = true;
     let startMinute = 1;
-    let time = startMinute * 60;
-    let countDown = document.getElementById('time');
-    setInterval(updateCountDown, 1000);
+    time = startMinute * 60;
+    counter = setInterval(updateCountDown, 1000);
+    counter;
 
     function updateCountDown() {
         let minutes = Math.floor(time / 60);
         let seconds = time % 60;
-        countDown.innerHTML = `${minutes}: ${seconds}`;
+        countDown.innerHTML = `Time: ${minutes}: ${seconds}`;
         time--;
-        if (time === -2) {
-            alert('Game over!');
-            imgWrappers.innerHTML = '';
-            document.querySelector('#submit').disabled = false;
-        }
+        checkTheResult();
     }
 }
+
+function checkTheResult() {
+    if (time == -1 && numberOfSuccess < 12) {
+        alert(`Time is out! Your Score is ${numberOfSuccess} Try again!`);
+        resetGame();
+    } else if (time == -1 && numberOfSuccess == 12) {
+        alert(`Congratulation! Your Score is ${numberOfSuccess} You won the game`);
+        resetGame();
+    } else if (time > -1 && numberOfSuccess == 12) {
+        alert(`Congratulation! Your Score is ${numberOfSuccess} You won the game`);
+        resetGame();
+    }
+}
+
+function resetGame() {
+    numberOfSuccess = 0;
+    imgWrappers.innerHTML = '';
+    document.querySelector('#submit').disabled = false;
+    clearInterval(counter);
+    time = 60;
+    countDown.innerHTML = `Time: 60 sek`;
+    score.innerHTML = `Score: 0`
+}
+
+
 
 // Skapar en loop som skapar frontSide och Backside av korten.
 function generateCardsImg(arr) {
@@ -174,8 +214,3 @@ function generateCardsImg(arr) {
 
     }
 }
-
-
-// När användaren hittar ett par för h*n 1 poäng.
-let score = document.querySelector('#score');
-
