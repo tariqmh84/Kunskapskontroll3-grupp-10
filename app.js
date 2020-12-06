@@ -6,6 +6,7 @@ let input = document.querySelector('#searchterm');
 let imgWrappers = document.querySelector('.game-container');
 let spinner = document.querySelector(".spinner");
 let countDown = document.getElementById('time');
+let submitBtn = document.querySelector('#submit');
 spinner.style.display = 'none';
 let card = {};
 let cards = [];
@@ -89,7 +90,6 @@ function getCards(event) {
             let randomizedArr = dupelicateElementArr.sort(() => Math.random() - 0.5);
 
             // generate korter från arrayen
-
             spinner.style.display = 'none';
             generateCardsImg(randomizedArr);
             cards = document.querySelectorAll('.card');
@@ -155,7 +155,8 @@ function resetCards() {
 
 // Tiden räknar ner från 60 sekunder när användaren klickar på start-knappen.
 function startTimer() {
-    document.querySelector('#submit').disabled = true;
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.3';
     let startMinute = 1;
     time = startMinute * 60;
     counter = setInterval(updateCountDown, 1000);
@@ -186,7 +187,8 @@ function checkTheResult() {
 function resetGame() {
     numberOfSuccess = 0;
     imgWrappers.innerHTML = '';
-    document.querySelector('#submit').disabled = false;
+    submitBtn.disabled = false;
+    submitBtn.style.opacity = '1';
     clearInterval(counter);
     time = 60;
     countDown.innerHTML = `Time: 60 sek`;
