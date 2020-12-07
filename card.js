@@ -11,4 +11,5 @@ Card.prototype.flippedCard = function() {
     return this.id;
 }
 
+// Exporterar card-filen till app-filen med moduler
 export { Card }
