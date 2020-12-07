@@ -7,7 +7,6 @@ let imgWrappers = document.querySelector('.game-container');
 let spinner = document.querySelector(".spinner");
 let countDown = document.getElementById('time');
 let submitBtn = document.querySelector('#submit');
-spinner.style.display = 'none';
 let card = {};
 let cards = [];
 let chosenCards = [];
@@ -17,6 +16,9 @@ let counter;
 
 // När användaren hittar ett par för h*n 1 poäng.
 let score = document.querySelector('#score');
+
+// spinner disable
+spinner.style.display = 'none';
 
 // Event EventListener så användaren kan hämta olika typer av images korter
 getDataBtn.addEventListener('submit', getCards);
@@ -99,6 +101,27 @@ function getCards(event) {
         .catch((err) => alert(err));
 }
 
+// Skapar en loop som skapar frontSide och Backside av korten.
+function generateCardsImg(arr) {
+    for (let item of arr) {
+        let cardDiv = document.createElement('div');
+        cardDiv.classList = 'card';
+        cardDiv.dataset.num = item.id;
+        let cardDivfront = document.createElement('div');
+        cardDivfront.classList = 'card-face front';
+        let cardDivBack = document.createElement('div');
+        cardDivBack.classList = 'card-face back';
+        let imgCard = document.createElement('img');
+        imgCard.src = item.urlSource;
+        imgCard.classList = 'back';
+        imgWrappers.appendChild(cardDiv);
+        cardDiv.appendChild(cardDivfront);
+        cardDiv.appendChild(cardDivBack);
+        cardDivBack.appendChild(imgCard);
+
+    }
+}
+
 // Skapar en function för att korten inte ska synas direkt när man klickar på start.
 // När användaren klickar på ett kort vänder den sida och en bild syns.
 function doFlip() {
@@ -109,7 +132,8 @@ function doFlip() {
     }
     if (chosenCards.indexOf(this) == -1) {
         chosenCards.push(this);
-        removeListeners(this);
+        console.log(chosenCards)
+        removeListener(this);
     }
     if (chosenCards.length == 2) {
         removeListenersAll();
@@ -125,12 +149,12 @@ function removeListenersAll() {
     cards.forEach(elm => elm.removeEventListener('click', doFlip));
 }
 
-function removeListeners(item) {
+function removeListener(item) {
     item.removeEventListener('click', doFlip);
 }
 
 function checkIfCardsMAtch() {
-    if (chosenCards[0].children[1].children[0].currentSrc == chosenCards[1].children[1].children[0].currentSrc) {
+    if (chosenCards[0].dataset.num === chosenCards[1].dataset.num) {
         setTimeout(hideCards, 500);
         numberOfSuccess++;
         score.innerHTML = `Score: ${numberOfSuccess}`;
@@ -193,26 +217,4 @@ function resetGame() {
     time = 60;
     countDown.innerHTML = `Time: 60 sek`;
     score.innerHTML = `Score: 0`
-}
-
-
-
-// Skapar en loop som skapar frontSide och Backside av korten.
-function generateCardsImg(arr) {
-    for (let item of arr) {
-        let cardDiv = document.createElement('div');
-        cardDiv.classList = 'card';
-        let cardDivfront = document.createElement('div');
-        cardDivfront.classList = 'card-face front';
-        let cardDivBack = document.createElement('div');
-        cardDivBack.classList = 'card-face back';
-        let img = document.createElement('img');
-        img.src = item.urlSource;
-        img.classList = 'back';
-        imgWrappers.appendChild(cardDiv);
-        cardDiv.appendChild(cardDivfront);
-        cardDiv.appendChild(cardDivBack);
-        cardDivBack.appendChild(img);
-
-    }
 }
