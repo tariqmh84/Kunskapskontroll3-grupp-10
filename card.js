@@ -24,4 +24,5 @@ Card.prototype.createCard = function() {
     return cardDiv;
 }
 
+// Exporterar card-filen till app-filen med moduler
 export { Card }
