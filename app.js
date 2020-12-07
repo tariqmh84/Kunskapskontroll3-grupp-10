@@ -48,7 +48,7 @@ function getCards(event) {
 
                 // Errorhantering3
                 if (inputVal == '') {
-                    throw 'The input can not be empty';
+                    throw 'Search term can not be empty';
                 } else {
                     if (response.status === 100) {
                         throw 'The API key passed was not valid or has expired';
@@ -104,7 +104,7 @@ function getCards(event) {
             addEventListenerAll();
             startTimer();
         })
-        .catch((err) => console.log(err));
+        .catch((err) => alert(err));
 }
 
 // Skapar en loop som skapar frontSide och Backside av korten.
@@ -138,6 +138,7 @@ function doFlip() {
 function addEventListenerAll() {
     cards.forEach(elm => elm.addEventListener('click', doFlip));
 }
+
 function removeListenersAll() {
     cards.forEach(elm => elm.removeEventListener('click', doFlip));
 }
