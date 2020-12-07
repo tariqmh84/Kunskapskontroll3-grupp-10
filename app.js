@@ -37,7 +37,7 @@ function getCards(event) {
     fetchedURL += "&nojsoncallback=1";
 
     // Skapa en Array som ska vi pusha alla fotorna i
-    let imageArray = [];
+    let cardsArray = [];
     // Skapar en fetch
     fetch(fetchedURL).then(
             function(response) {
@@ -74,50 +74,40 @@ function getCards(event) {
                 let id = data.photos.photo[i].id;
                 let server = data.photos.photo[i].server;
                 let secret = data.photos.photo[i].secret;
-                let imageSrc = `http://live.staticflickr.com/${server}/${id}_${secret}_q.jpg`;
+                let cardImageSrc = `http://live.staticflickr.com/${server}/${id}_${secret}_q.jpg`;
                 // Skapa Card object
-                card = new Card(id, imageSrc);
+                card = new Card(id, cardImageSrc);
                 // Pushar in bilderna i arrayn
-                imageArray.push(card);
+                cardsArray.push(card);
             }
 
+
+
             // Välja 12 sticker av fotona och dubblar dem och ligga dem i DOM
-            let pickedImages = imageArray.splice(0, 12);
+            let pickedCards = cardsArray.splice(0, 12);
             // Duplicate Fotona
-            let dupelicateElementArr = pickedImages.reduce(function(res, current) {
+            let dupelicateCardsArr = pickedCards.reduce(function(res, current) {
                 return res.concat([current, current]);
             }, []);
 
             //Randomiz arrayen
-            let randomizedArr = dupelicateElementArr.sort(() => Math.random() - 0.5);
+            let randomizedCards = dupelicateCardsArr.sort(() => Math.random() - 0.5);
 
             // generate korter från arrayen
             spinner.style.display = 'none';
-            generateCardsImg(randomizedArr);
+            generateCards(randomizedCards);
             cards = document.querySelectorAll('.card');
             addEventListenerAll();
             startTimer();
         })
-        .catch((err) => alert(err));
+        .catch((err) => console.log(err));
 }
 
 // Skapar en loop som skapar frontSide och Backside av korten.
-function generateCardsImg(arr) {
+function generateCards(arr) {
     for (let item of arr) {
-        let cardDiv = document.createElement('div');
-        cardDiv.classList = 'card';
-        cardDiv.dataset.num = item.id;
-        let cardDivfront = document.createElement('div');
-        cardDivfront.classList = 'card-face front';
-        let cardDivBack = document.createElement('div');
-        cardDivBack.classList = 'card-face back';
-        let imgCard = document.createElement('img');
-        imgCard.src = item.urlSource;
-        imgCard.classList = 'back';
-        imgWrappers.appendChild(cardDiv);
-        cardDiv.appendChild(cardDivfront);
-        cardDiv.appendChild(cardDivBack);
-        cardDivBack.appendChild(imgCard);
+        let card_element = item.createCard();
+        imgWrappers.appendChild(card_element);
 
     }
 }
@@ -132,7 +122,6 @@ function doFlip() {
     }
     if (chosenCards.indexOf(this) == -1) {
         chosenCards.push(this);
-        console.log(chosenCards)
         removeListener(this);
     }
     if (chosenCards.length == 2) {
@@ -196,13 +185,13 @@ function startTimer() {
 }
 
 function checkTheResult() {
-    if (time == -1 && numberOfSuccess < 12) {
+    if (time == -2 && numberOfSuccess < 12) {
         alert(`Time is out! Your Score is ${numberOfSuccess} Try again!`);
         resetGame();
-    } else if (time == -1 && numberOfSuccess == 12) {
+    } else if (time == -2 && numberOfSuccess == 12) {
         alert(`Congratulation! Your Score is ${numberOfSuccess} You won the game`);
         resetGame();
-    } else if (time > -1 && numberOfSuccess == 12) {
+    } else if (time > -2 && numberOfSuccess == 12) {
         alert(`Congratulation! Your Score is ${numberOfSuccess} You won the game`);
         resetGame();
     }
