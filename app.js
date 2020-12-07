@@ -1,4 +1,7 @@
+// Importerar filen card
 import { Card } from './card.js';
+
+
 // Declare variables som ska använda
 let apiKey = '0133bc1fb6266761784237b4007a7c13';
 let getDataBtn = document.querySelector('#searchdiv');
@@ -15,10 +18,10 @@ let numberOfSuccess = 0;
 let time;
 let counter;
 
-// När användaren hittar ett par för h*n 1 poäng.
+// Selectar elementet #score
 let score = document.querySelector('#score');
 
-// Event EventListener så användaren kan hämta olika typer av images korter
+// EventListener så användaren kan hämta olika typer av images kort
 getDataBtn.addEventListener('submit', getCards);
 
 // Listener som tar hand om data fetching och sortering
@@ -117,18 +120,19 @@ function doFlip() {
     }
 }
 
+// Skapar funktioner för att korten ska vändas när spelaren klickar på ett kort. 
 function addEventListenerAll() {
     cards.forEach(elm => elm.addEventListener('click', doFlip));
 }
-
 function removeListenersAll() {
     cards.forEach(elm => elm.removeEventListener('click', doFlip));
 }
-
 function removeListeners(item) {
     item.removeEventListener('click', doFlip);
 }
 
+// Skapar en funktionen för att om korten inte matchar så ska korten vändas tillbaka.
+// Sätter en timer på hur länge korten syns innan dem vänds tillbaka.
 function checkIfCardsMAtch() {
     if (chosenCards[0].children[1].children[0].currentSrc == chosenCards[1].children[1].children[0].currentSrc) {
         setTimeout(hideCards, 500);
@@ -139,6 +143,7 @@ function checkIfCardsMAtch() {
     }
 }
 
+// Denna funktionen gör att korten visas när spelaren klickar.
 function hideCards() {
     chosenCards[0].style.opacity = 0.5;
     chosenCards[1].style.opacity = 0.5;
@@ -146,6 +151,7 @@ function hideCards() {
     chosenCards = new Array();
 }
 
+// Skapar en funktion som vänder tillbaka korten om det inte är en match.
 function resetCards() {
     chosenCards[0].classList.remove('active');
     chosenCards[1].classList.remove('active');
@@ -171,6 +177,7 @@ function startTimer() {
     }
 }
 
+// Skapar en function för alerten som dyker upp när tiden är slut. Funktionen visar hur många poäng spelaren fick.
 function checkTheResult() {
     if (time == -1 && numberOfSuccess < 12) {
         alert(`Time is out! Your Score is ${numberOfSuccess} Try again!`);
@@ -184,17 +191,18 @@ function checkTheResult() {
     }
 }
 
+// Skapar en funktion till reset när tiden är ute och spelet är slut.
 function resetGame() {
     numberOfSuccess = 0;
     imgWrappers.innerHTML = '';
     submitBtn.disabled = false;
     submitBtn.style.opacity = '1';
+    // Återställer tiden och poängen till 0 och 60 sek.
     clearInterval(counter);
     time = 60;
     countDown.innerHTML = `Time: 60 sek`;
     score.innerHTML = `Score: 0`
 }
-
 
 
 // Skapar en loop som skapar frontSide och Backside av korten.
