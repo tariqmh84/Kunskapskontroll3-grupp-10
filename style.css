@@ -21,7 +21,10 @@ body {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    width: 50vw;
+    width: 70vw;
+    background: url("img/head_banner.png") no-repeat center center;
+    background-size: contain;
+    padding-bottom: 20px;
 }
 
 .title {
@@ -37,9 +40,12 @@ body {
     display: flex;
     justify-content: space-around;
     margin: 20px 0;
-    width: 100%;
+    width: 63%;
     background-color: #0c361a;
     color: #fff;
+    -webkit-box-shadow: 2px 2px 1px 0px rgba(50, 50, 50, 0.83);
+    -moz-box-shadow: 2px 2px 1px 0px rgba(50, 50, 50, 0.83);
+    box-shadow: 2px 2px 1px 0px rgba(50, 50, 50, 0.83);
 }
 
 .game-container {
