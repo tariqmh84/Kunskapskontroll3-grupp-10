@@ -5,7 +5,7 @@
 }
 
 body {
-    background: url('/img/bakgrund.png') repeat center center;
+    background: url('../img/bakgrund.png') repeat center center;
     overflow-x: hidden;
 }
 
@@ -22,7 +22,7 @@ body {
     flex-direction: column;
     align-items: center;
     width: 70vw;
-    background: url("img/head_banner.png") no-repeat center center;
+    background: url("../img/head_banner.png") no-repeat center center;
     background-size: contain;
     padding-bottom: 20px;
 }
@@ -130,7 +130,7 @@ body {
 }
 
 .front {
-    background: url('img/cardback.png') no-repeat center center;
+    background: url('../img/cardback.png') no-repeat center center;
     background-size: cover;
     z-index: 2
 }
@@ -141,7 +141,7 @@ body {
 }
 
 .spinner {
-    background: url('img/spinner.png') no-repeat center center;
+    background: url('../img/spinner.png') no-repeat center center;
     width: 179px;
     height: 168px;
     /* border: 4px solid #f3f3f3;
