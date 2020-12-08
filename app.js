@@ -110,6 +110,7 @@ function getCards(event) {
 // Skapar en loop som skapar frontSide och Backside av korten.
 function generateCards(arr) {
     for (let item of arr) {
+        // Använda Instans-metod för att skap kort
         let card_element = item.createCard();
         imgWrappers.appendChild(card_element);
 
@@ -134,17 +135,17 @@ function doFlip() {
     }
 }
 
-// Skapar funktioner för att korten ska vändas när spelaren klickar på ett kort. 
+// Skapar funktion för att korten ska vändas när spelaren klickar på ett kort. 
 function addEventListenerAll() {
     cards.forEach(elm => elm.addEventListener('click', doFlip));
 }
 
+// Skapar funktioner för att korter ska inte vändas. 
 function removeListenersAll() {
     cards.forEach(elm => elm.removeEventListener('click', doFlip));
 }
 
 function removeListener(item) {
-
     item.removeEventListener('click', doFlip);
 }
 
