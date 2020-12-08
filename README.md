@@ -17,4 +17,4 @@ Användaren kan själv skriva in i input vilket ämne, till exempel hundar eller
 När användaren klickat på start, börjar tiden att ticka neråt. Du har 60 sekunder på dig att hitta alla par. 
 Klicka på två kort, är det rätt? Får du 1 poäng som visas ovanför spelplanen. Är det fel? Då vänds korten tillbaka och användaren får välja två andra. 
 
-När tiden är ute, kommer det upp en lite ruta i toppen som säger "Game over och berättar hur många poäng du fick" och när du klickar bort den försvinner dina spelkort, tiden och poäng återställs och du kan starta en ny omgång med ett nytt ämne. 
+När tiden är ute, kommer det upp en lite ruta i toppen som säger "Time is out och berättar hur många poäng du fick" och när du klickar bort den försvinner dina spelkort, tiden och poäng återställs och du kan starta en ny omgång med ett nytt ämne. 
